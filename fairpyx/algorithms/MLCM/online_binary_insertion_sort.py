@@ -27,8 +27,15 @@ class OBIS:
         :variables model (object): The machine learning model.
         :variables S (list): List of sorted schedules based on student’s past responses.
         :variables x (list): Newly-generated schedule to be inserted.
-        :variables Q (list): Student’s comparison queries.
+        :variables Q (list): Student’s comparison queries. 
+
+        :methods OBIS_algorithm(self): The Online Binary Insertion Sort algorithm.
+        :methods main_loop_for_OBIS(self): The main loop for the OBIS algorithm.
+        :methods update_D_card(self): Update the D_card data based on the student’s past responses and model.
+        :methods update_D_ord(self): Update the D_ord data based on the student’s past responses and model.
+        :methods update_schedules(self): Update the permissible schedules based on the student’s past responses and model.
         """
+        self.id = id
         self.instance = instance
         self.prices = prices
         self.budget = budget
@@ -43,7 +50,12 @@ class OBIS:
         def OBIS_algorithm(self):
             """
             The Online Binary Insertion Sort algorithm.
-            pseudo code:
+
+            :param self
+            
+            :return list: next CQ to ask the student.
+            
+            :pseudo code
                 if x can be inserted into Si based on the already answered CQs:
                     Si ← Sort(Si,x,Qi) 
                     Di,ord ← All pairwise orderings inferred from Si 
@@ -51,17 +63,18 @@ class OBIS:
                     x ← argmax (x′∈Ψi,x′/ ∈Si:x′·p≤bi Mi(x′)  
                 CQ ← NextBinaryInsertionSortQuery(Si,x,Qi) 
                 return CQ
-            
-            :param self
-            
-            :return list: new utility for the student.
             """
             pass
 
         def main_loop_for_OBIS(self):
             """
             The main loop for the OBIS algorithm.
-            Pseudo code:
+            
+            :param self
+
+            :return list: the student’s utility.
+
+            :pseudo code
                 ask the student if he wants to answer a CQ
                 while the student wants to answer a CQ:
                     CQ ← OBIS_algorithm()
@@ -72,9 +85,6 @@ class OBIS:
                     ask the student if he wants to answer a CQ
                 return the student’s utility
 
-            :param self
-
-            :return list: the student’s utility.
             """
             pass
 
