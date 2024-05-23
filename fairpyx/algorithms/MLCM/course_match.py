@@ -20,13 +20,12 @@ def collect_student_preferences_gui(instance: Instance) -> Instance:
     """
     pass
 
-def compute_A_CEEI(instance: Instance, price_vector: Dict[str, int]) -> Tuple[Dict[str, int], Instance, int]:
+def compute_A_CEEI(instance: Instance) -> Tuple[Dict[str, int], Instance, int]:
     """
     Finds a price vector that constitutes an approximate Competitive Equilibrium from Equal Incomes (A-CEEI)
     based on a heuristic algorithm.
 
     :param instance (Instance): a fair-course-allocation instance for the student's preference for courses
-    :param price_vector (dict): An initial vector of course prices.
 
     :return tuple:
         - price_vector (dict): The price vector of the courses that approximates A-CEEI.
@@ -75,13 +74,12 @@ def reduce_undersubscription(price_vector: Dict[str, int], initial_budgets: List
     # This involves increasing student budgets and allowing them to select additional courses
     pass
 
-def course_allocation_pipeline(instance: Instance, price_vector: Dict[str, int], current_allocation: Dict[str, List[int]], students_budget: int) -> Tuple[List[float], Dict[str, List[int]], List[float]]:
+def course_allocation_pipeline(instance: Instance, price_vector: Dict[str, int], students_budget: int) -> Tuple[List[float], Dict[str, List[int]], List[float]]:
     """
     Orchestrates the course allocation pipeline by calling the three main functions sequentially.
 
 
     :param instance (Instance): a fair-course-allocation instance, for course capacities and the student's preference for courses
-    :param current_allocation (dict): The current allocation of students to courses.
     :param price_vector (dict): An initial vector of course prices.
     :param students_budget (list): The initial budgets of the students.
 
@@ -91,7 +89,7 @@ def course_allocation_pipeline(instance: Instance, price_vector: Dict[str, int],
         - updated_budgets (list): The updated budgets of the students.
     """
     # Step 1: Compute A-CEEI
-    price_vector, current_allocation, students_budget = compute_A_CEEI(instance, price_vector)
+    price_vector, current_allocation, students_budget = compute_A_CEEI(instance)
     
     # Step 2: Remove oversubscription
     adjusted_price_vector, updated_allocation = remove_oversubscription(price_vector, instance, current_allocation)
