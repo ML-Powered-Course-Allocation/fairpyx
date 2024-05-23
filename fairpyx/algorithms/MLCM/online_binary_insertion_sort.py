@@ -10,27 +10,97 @@ Date: 2024-05
 from fairpyx import Instance, AllocationBuilder
 
 class OBIS:
-    #Current ML model Mi, cardinal data set Di,card, price vector p, permissible schedules Ψi, budget bi, student’s answered comparison queries Qi, list of sorted schedules based on student’s past responses Si, newly-generated schedule to be inserted x
-    def __init__(self, model, D_card, prices, schedules, budget , Q, S, x):
+
+    def __init__(self, id:int, instance:Instance ,prices:list, budget:list):
         """
-        Args:
-            model: The current ML model Mi.
-            D_card: The cardinal data set Di,card.
-            prices: The price vector p.
-            schedules: The permissible schedules Ψi.
-            budget: The budget bi.
-            Q: The student’s answered comparison queries Qi.
-            S: The list of sorted schedules based on student’s past responses Si.
-            x: The newly-generated schedule to be inserted x.
+        OBIS is designed to generate a sequence of CQs that maximizes the worst case number of schedule
+        pairs for which we can infer their relation with respect to the student’s preferences.
+
+        :param id (int): The id of the student.
+        :param instance (Instance): The instance of the problem.
+        :param prices (list): The prices of the courses.
+        :param budget (list): The budget of the student.
+        
+        :variables schedules (list): permissible schedules,
+        :variables D_card (list): The D,card data, where each element is a list representing a combination of courses.
+        :variables D_ord (list): All the answers to the comparison questions.
+        :variables model (object): The machine learning model.
+        :variables S (list): List of sorted schedules based on student’s past responses.
+        :variables x (list): Newly-generated schedule to be inserted.
+        :variables Q (list): Student’s comparison queries.
         """
-        self.model = model
-        self.D_card = D_card
+        self.instance = instance
         self.prices = prices
-        self.schedules = schedules
         self.budget = budget
-        self.Q = Q
-        self.S = S
-        self.x = x
+        self.schedules = []
+        self.D_card = []
+        self.model = None
+        self.S = []
+        self.x = None
+        self.D_ord = []
+        self.Q = []
+
+        def OBIS_algorithm(self):
+            """
+            The Online Binary Insertion Sort algorithm.
+            pseudo code:
+                if x can be inserted into Si based on the already answered CQs:
+                    Si ← Sort(Si,x,Qi) 
+                    Di,ord ← All pairwise orderings inferred from Si 
+                    Mi ← Train(Di,card,Di,ord) (MVNN model)
+                    x ← argmax (x′∈Ψi,x′/ ∈Si:x′·p≤bi Mi(x′)  
+                CQ ← NextBinaryInsertionSortQuery(Si,x,Qi) 
+                return CQ
+            
+            :param self
+            
+            :return list: new utility for the student.
+            """
+            pass
+
+        def main_loop_for_OBIS(self):
+            """
+            The main loop for the OBIS algorithm.
+            Pseudo code:
+                ask the student if he wants to answer a CQ
+                while the student wants to answer a CQ:
+                    CQ ← OBIS_algorithm()
+                    ask the student CQ
+                    update_D_card()
+                    update_D_ord()
+                    update_schedules()
+                    ask the student if he wants to answer a CQ
+                return the student’s utility
+
+            :param self
+
+            :return list: the student’s utility.
+            """
+            pass
+
+        def update_D_card(self):
+            """
+            Update the D_card data based on the student’s past responses and model.
+
+            :param self
+            """
+            pass
+
+        def update_D_ord(self):
+            """
+            Update the D_ord data based on the student’s past responses and model.
+
+            :param self
+            """
+            pass
+
+        def update_schedules(self):
+            """
+            Update the permissible schedules based on the student’s past responses and model.
+
+            :param self
+            """
+            pass
 
 
     
