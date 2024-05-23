@@ -14,9 +14,9 @@ def collect_student_preferences_gui(instance: Instance) -> Instance:
     """
     Provides a graphical user interface (GUI) for students to enter their course preferences.
 
-    :param instance: a fair-course-allocation instance, At first only contains the list of courses
+    :param instance (Instance): a fair-course-allocation instance, At first only contains the list of courses
     
-    :return instance: a fair-course-allocation instance, with student preferences regarding the courses
+    :return instance (Instance): a fair-course-allocation instance, with student preferences regarding the courses
     """
     pass
 
@@ -30,7 +30,7 @@ def compute_A_CEEI(instance: Instance, price_vector: Dict[str, int]) -> Tuple[Di
 
     :return tuple:
         - price_vector (dict): The price vector of the courses that approximates A-CEEI.
-        - student_schedules (instance): The utility-maximizing schedule for each student within their budget.
+        - current_allocation (instance): The utility-maximizing schedule for each student within their budget.
         - students_budget (int): Budget for the students
     """
     # Implementation of the heuristic algorithm to find the A-CEEI price vector
@@ -91,7 +91,7 @@ def course_allocation_pipeline(instance: Instance, price_vector: Dict[str, int],
         - updated_budgets (list): The updated budgets of the students.
     """
     # Step 1: Compute A-CEEI
-    price_vector, student_schedules, students_budget = compute_A_CEEI(instance, price_vector)
+    price_vector, current_allocation, students_budget = compute_A_CEEI(instance, price_vector)
     
     # Step 2: Remove oversubscription
     adjusted_price_vector, updated_allocation = remove_oversubscription(price_vector, instance, current_allocation)
