@@ -25,11 +25,11 @@ def MLCM_algorithm():
     :pseudo code
         instance = new Instance()
         instance = collect_student_preferences_gui(instance) 
-        prices, budget = compute_A_CEEI()
+        prices, budget = compute_A_CEEI(instance)
         for each student id:
             student_OBIS = new OBIS(id, instance, prices, budget)
             instance = student_OBIS.main_loop_for_OBIS()
-        final_price_vector, final_allocation, updated_budgets = course_allocation_pipeline()
+        final_price_vector, final_allocation, updated_budgets = course_allocation_pipeline(instance, prices, budget)
         return final_allocation
 
         
