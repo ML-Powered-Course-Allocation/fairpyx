@@ -22,8 +22,13 @@ def prepare_data(Di_card, Di_ord):
 def train_model(x, y):
     """
     Train a machine learning model to predict the utility of different combinations of courses.
-    
-    Psuedo code:
+
+    :param x: The input data for training the model.
+    :param y: The target values for training the model.
+
+    :return list: Parameters of trained ML model M (new utility)
+
+    :psuedo code:
         θ_0 ← initialize parameters of the ML model M 
         for i=1 to treg  
             lossreg ← 0 
@@ -40,10 +45,5 @@ def train_model(x, y):
                 lossclass ← lossclass +lclass(y, y') + λclass 
             θi ←ADAM(θi-1, lossclass, ηclass) 
         return θ_(treg+tclass)
-
-    :param x: The input data for training the model.
-    :param y: The target values for training the model.
-
-    :return list: Parameters of trained ML model M (new utility)
     """
     pass
