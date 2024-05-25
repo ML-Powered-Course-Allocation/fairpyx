@@ -7,8 +7,10 @@ https://arxiv.org/abs/2210.00954
 Programmer: Ben Dabush and Naama Shiponi
 Date: 2024-05
 """
-from fairpyx import Instance, AllocationBuilder
+from fairpyx.instances import Instance
+from fairpyx.allocations import AllocationBuilder
 from typing import List, Dict, Tuple
+from fairpyx.algorithms.MLCM.A_CEEI import A_CEEI
 
 def collect_student_preferences_gui(instance: Instance) -> Instance:
     """
@@ -20,21 +22,6 @@ def collect_student_preferences_gui(instance: Instance) -> Instance:
     """
     pass
 
-def compute_A_CEEI(instance: Instance) -> Tuple[Dict[str, int], Instance, int]:
-    """
-    Finds a price vector that constitutes an approximate Competitive Equilibrium from Equal Incomes (A-CEEI)
-    based on a heuristic algorithm.
-
-    :param instance (Instance): a fair-course-allocation instance for the student's preference for courses
-
-    :return tuple:
-        - price_vector (dict): The price vector of the courses that approximates A-CEEI.
-        - current_allocation (instance): The utility-maximizing schedule for each student within their budget.
-        - students_budget (int): Budget for the students
-    """
-    # Implementation of the heuristic algorithm to find the A-CEEI price vector
-    # This will involve iterating over price vectors, solving MIP for each student, and finding utility-maximizing schedules
-    pass
 
 
 def remove_oversubscription(price_vector: Dict[str, int], instance: Instance, current_allocation: Dict[str, List[int]]) -> Tuple[Dict[str, int], Dict[str, List[int]]]:
@@ -89,10 +76,11 @@ def course_allocation_pipeline(instance: Instance, price_vector: Dict[str, int],
         - updated_budgets (list): The updated budgets of the students.
     """
     # Step 1: Compute A-CEEI
-    price_vector, current_allocation, students_budget = compute_A_CEEI(instance)
-    
+    price_vector, best_error, students_budget = A_CEEI(instance)
+
+    current_allocation= AllocationBuilder.from_dict(current_allocation)
     # Step 2: Remove oversubscription
-    adjusted_price_vector, updated_allocation = remove_oversubscription(price_vector, instance, current_allocation)
+    adjusted_price_vector, updated_allocation = remove_oversubscription(price_vector, instance)
     
     # Step 3: Reduce undersubscription
     final_price_vector, final_allocation, updated_budgets = reduce_undersubscription(instance, adjusted_price_vector, updated_allocation, students_budget)
