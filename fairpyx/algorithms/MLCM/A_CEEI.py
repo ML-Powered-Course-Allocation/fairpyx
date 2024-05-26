@@ -68,13 +68,12 @@ def alpha(demands,item_capacities):
     Calculate the clearing error based on demands and capacities.
     α = (d(p) - q)^2
 
-    
     :param demands (list): List of demands for each course.
     :param item_capacities (dict): Dictionary with course capacities.
        
     :returns (float) Clearing error.
     
-    Example:
+    :example
     >>> item_capacities = {"x": 1, "y": 2, "z": 2}
     >>> alpha([1, 2, 2], item_capacities)
     0
@@ -96,6 +95,7 @@ def d(p,item_capacities,student_preferences):
     
     :return (list) List of demands for each course.
 
+    :example
     >>> student_preferences = {
     ...     "Alice": {"x": 55, "y": 55, "z": 100},
     ...     "Bob": {"x": 40, "y": 60, "z": 40},
@@ -123,7 +123,7 @@ def N(p,item_capacities,student_preferences):
 
     :return (list) List of neighboring price vectors.
     
-    Example:
+    :example
     >>> student_preferences = {
     ...     "Alice": {"x": 55, "y": 55, "z": 100},
     ...     "Bob": {"x": 40, "y": 60, "z": 40},
@@ -142,23 +142,7 @@ def N(p,item_capacities,student_preferences):
     neighbors.sort(key=lambda p: alpha(d(p,item_capacities,student_preferences),item_capacities))
     return neighbors
 
-def calculate_student_budgets(p, student_preferences):
-    """
-    Calculate the total budget spent by each student based on the price vector.
-    
-    :param p (list): Price vector for the courses.
-    :param student_preferences (dict): Preferences of each student.
-    
-    :return dict: Total budget spent by each student.
-    """
-    student_budgets = {}
-    for student, preferences in student_preferences.items():
-        budget_spent = 0
-        allocated_budget = sum(p[i] * preferences[course] for i, course in enumerate(preferences.keys()))
-        if allocated_budget != 0:
-            budget_spent = 100 * allocated_budget / allocated_budget
-        student_budgets[student] = budget_spent
-    return student_budgets
+
 # if __name__ == "__main__":
 #     import doctest
 #     doctest.testmod()
@@ -175,5 +159,4 @@ def calculate_student_budgets(p, student_preferences):
 #     best_price_vector, best_error = A_CEEI(beta, d, N, t, item_capacities, student_preferences,seed)
 #     print("Best Price Vector:", best_price_vector)
 #     print("Best Error:", best_error)
-#     student_budgets = calculate_student_budgets(best_price_vector, student_preferences)
-#     print("Student Budgets:", student_budgets)
+
