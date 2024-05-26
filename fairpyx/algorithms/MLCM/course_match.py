@@ -22,7 +22,34 @@ def collect_student_preferences_gui(instance: Instance) -> Instance:
     """
     pass
 
+def adjusting_courses(price_vector: List , instance: Instance):
+    """
+    Adjusts the prices of the courses based on the students' preferences and the course capacities.
 
+    :param price_vector (dict): The initial vector of course prices.
+    :param instance (Instance): a fair-course-allocation instance, for course capacities and the student's preference for courses
+
+    :return price_vector (dict): The adjusted vector of course prices.
+
+    :example
+    >>> price_vector = [84, 98, 100]
+    >>> instance = Instance(
+    ...     valuations = {"001":{"x":50, "y":50, "z":100}, "002":{"x":40, "y":60, "z":40}},
+    ...     agent_capacities = 2,
+    ...     item_capacities = {"x":1, "y":1, "z":2})
+    >>> adjusting_courses(price_vector, instance)
+    ["001":[z,x], "002":[x, y]]
+
+    >>> price_vector = [50, 20, 80, 10]
+    >>> instance = Instance(
+    ...     valuations = {"001":{"x":50, "y":50, "w":20, "z":100}, "002":{"x":40, "y":60, "w":60, "z":40}, "003":{"x":60, "y":60, "w":20, "z":100},
+    ...     agent_capacities = 2,
+    ...     item_capacities = {"x":1, "y":1, "w":1, "z":2})
+    >>> adjusting_courses(price_vector, instance)
+    ["001":[z,x], "002":[w, y], "003":[z,y]]
+    """
+
+    pass
 
 def remove_oversubscription(price_vector: Dict[str, int], instance: Instance, current_allocation: Dict[str, List[int]]) -> Tuple[Dict[str, int], Dict[str, List[int]]]:
     """
@@ -36,6 +63,8 @@ def remove_oversubscription(price_vector: Dict[str, int], instance: Instance, cu
     :return tuple:
         - price_vector (dict): The adjusted price vector after removing oversubscription.
         - updated_allocation (dict): The updated allocation of students to courses with no oversubscription.
+
+    
     """
     # Implementation of the oversubscription removal process
     # This involves identifying the most oversubscribed courses and adjusting their prices
