@@ -7,8 +7,7 @@ https://arxiv.org/abs/2210.00954
 Programmer: Ben Dabush and Naama Shiponi
 Date: 2024-05
 """
-
-from fairpyx import Instance, AllocationBuilder
+from fairpyx.instances import Instance
 
 def NBISQ(id:int, instance:Instance, S:list, x:list, Q:list):
     """
@@ -40,5 +39,20 @@ def NBISQ(id:int, instance:Instance, S:list, x:list, Q:list):
                     R←M-1 
             else 
                 return CQ=(x,Si[M]) 
+
+    :example
+    >>>  instance = Instance(
+    ...  valuations = {"001": {"x": 50, "y": 50, "w": 20, "z": 100}, "002": {"x": 40, "y": 60, "w": 60, "z": 40},"003": {"x": 60, "y": 60, "w": 20, "z": 100}}, 
+    ...  agent_capacities = 2, 
+    ...  item_capacities = {"x": 1, "y": 1, "w": 1, "z": 2})
+    >>> S = [["x", "y"], ["w", "z"], ["x", "z"]]
+    >>> x = ["y", "w"]
+    >>> Q =  [(("y", "w"), ("x", "y")), (("y", "w"), ("w", "z"))]
+    >>> NBISQ("001",instance, S, x, Q)
+    (['y', 'w'], ['w', 'z'])
     """
-    pass
+    
+
+
+
+
