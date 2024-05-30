@@ -11,7 +11,7 @@ def remove_oversubscription(price_vector: Dict[str, int], student_budgets: List[
     :param demand_function: Function that takes price vector and returns excess demand vector
     :param epsilon: Small value to determine when to stop binary search
     :return: Adjusted price vector (list of floats)
-   >>> instance = Instance(
+    >>> instance = Instance(
     ...   agent_capacities = {"Alice": 2, "Bob": 3, "Tom": 3}, 
     ...   item_capacities  = {"c1": 1, "c2": 1, "c3": 1}, 
     ...   valuations       = {"Alice": {"c1": 55, "c2": 55, "c3": 100},
@@ -41,7 +41,7 @@ def demand_function(p,item_capacities,student_preferences):
     ...     "Tom": {"x": 70, "y": 70, "z": 100}
     ... }
     >>> item_capacities = {"x": 1, "y": 1, "z": 1}
-    >>> demand_function([40, 50, 50],item_capacities,student_preferences)
+    >>> d([40, 50, 50],item_capacities,student_preferences)
     [2, 2, 2]
     """
     pass
